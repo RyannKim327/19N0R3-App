@@ -18,6 +18,9 @@ import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
+import android.graphics.Color;
 
 public class a extends Activity {
 	SharedPreferences pref;
@@ -67,7 +70,13 @@ public class a extends Activity {
 							b.setMessage(o.getString("content"));
 							b.setPositiveButton("Close", null);
 							b.setCancelable(false);
-							b.show();
+							//b.show();
+							AlertDialog d = b.create();
+							float f = 15;
+							ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
+							s.getPaint().setColor(Color.parseColor("#dedede"));
+							d.getWindow().setBackgroundDrawable(s);
+							d.show();
 						} catch (JSONException e) {}
 					}
 				});
@@ -107,7 +116,13 @@ public class a extends Activity {
 										b.setMessage(o.getString("content"));
 										b.setPositiveButton("Close", null);
 										b.setCancelable(false);
-										b.show();
+										//b.show();
+										AlertDialog d = b.create();
+										float f = 15;
+										ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
+										s.getPaint().setColor(Color.parseColor("#dedede"));
+										d.getWindow().setBackgroundDrawable(s);
+										d.show();
 									} catch (JSONException e) {}
 								}
 							});
