@@ -55,7 +55,6 @@ public class a extends Activity {
 				@Override
 				public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
 					array.getFilter().filter(filter.getText().toString());
-					Toast.makeText(a.this, array.getCount(),1).show();
 				}
 				@Override
 				public void afterTextChanged(Editable p1) {}
