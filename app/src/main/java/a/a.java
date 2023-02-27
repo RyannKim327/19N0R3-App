@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.Color;
+import android.widget.Toast;
 
 public class a extends Activity {
 	SharedPreferences pref;
@@ -40,7 +41,7 @@ public class a extends Activity {
 			
 			for(int i = 0; i < lists.length(); i++){
 				JSONObject obj = lists.getJSONObject(i);
-				array.add(obj.getString("title"));
+				array.add(obj.getString("title") + " [" + obj.getString("author") + "]");
 			
 			}
 		
@@ -54,6 +55,7 @@ public class a extends Activity {
 				@Override
 				public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
 					array.getFilter().filter(filter.getText().toString());
+					Toast.makeText(a.this, array.getCount(),1).show();
 				}
 				@Override
 				public void afterTextChanged(Editable p1) {}
@@ -101,7 +103,7 @@ public class a extends Activity {
 
 						for(int i = 0; i < lists.length(); i++){
 							JSONObject obj = lists.getJSONObject(i);
-							array.add(obj.getString("title"));
+							array.add(obj.getString("title") + " [" + obj.getString("author") + "]");
 
 						}
 
@@ -112,7 +114,7 @@ public class a extends Activity {
 									try {
 										JSONObject o = lists.getJSONObject(p3);
 										AlertDialog.Builder b = new AlertDialog.Builder(a.this);
-										b.setTitle(o.getString("title"));
+										b.setTitle(o.getString("title") + "\nBy: " + o.getString("author"));
 										b.setMessage(o.getString("content"));
 										b.setPositiveButton("Close", null);
 										b.setCancelable(false);
