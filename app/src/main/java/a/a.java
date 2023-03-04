@@ -22,6 +22,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.Color;
 import android.widget.Toast;
+import android.graphics.drawable.ColorDrawable;
 
 public class a extends Activity {
 	SharedPreferences pref;
@@ -30,10 +31,16 @@ public class a extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Thread.setDefaultUncaughtExceptionHandler(new err(this));
+		
+		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#c58940")));
+		getWindow().setStatusBarColor(Color.parseColor("#c58940"));
+		
 		pref = getSharedPreferences("MPOP", MODE_PRIVATE);
 		LinearLayout layout = new LinearLayout(this);
 		final EditText filter = new EditText(this);
 		final ListView list = new ListView(this);
+		
+		layout.setBackgroundColor(Color.parseColor("#faf881"));
 		
 		try{
 			final JSONArray lists = obj().getJSONArray("poems");
@@ -75,7 +82,7 @@ public class a extends Activity {
 							AlertDialog d = b.create();
 							float f = 15;
 							ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
-							s.getPaint().setColor(Color.parseColor("#dedede"));
+							s.getPaint().setColor(Color.parseColor("#f1c28a"));
 							d.getWindow().setBackgroundDrawable(s);
 							d.show();
 						} catch (JSONException e) {}
@@ -121,7 +128,7 @@ public class a extends Activity {
 										AlertDialog d = b.create();
 										float f = 15;
 										ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
-										s.getPaint().setColor(Color.parseColor("#dedede"));
+										s.getPaint().setColor(Color.parseColor("#f1c28a"));
 										d.getWindow().setBackgroundDrawable(s);
 										d.show();
 									} catch (JSONException e) {}
