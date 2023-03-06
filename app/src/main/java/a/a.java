@@ -23,10 +23,13 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.graphics.Color;
 import android.widget.Toast;
 import android.graphics.drawable.ColorDrawable;
+import mpop.revii.itsmypoem.R;
+import android.widget.TextView;
+import java.util.ArrayList;
 
 public class a extends Activity {
 	SharedPreferences pref;
-	ArrayAdapter<String> array;
+	lists array;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,12 +47,12 @@ public class a extends Activity {
 		
 		try{
 			final JSONArray lists = obj().getJSONArray("poems");
-			array = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+			ArrayList l = new ArrayList<String>();
+			array = new lists(this, l);
 			
 			for(int i = 0; i < lists.length(); i++){
 				JSONObject obj = lists.getJSONObject(i);
-				array.add(obj.getString("title") + " [" + obj.getString("author") + "]");
-			
+				l.add(obj);
 			}
 		
 			layout.setOrientation(LinearLayout.VERTICAL);
@@ -105,12 +108,12 @@ public class a extends Activity {
 					String data = p2.getStringExtra("data");
 					try{
 						final JSONArray lists = obj().getJSONArray("poems");
-						array = new ArrayAdapter<String>(a.this, android.R.layout.simple_list_item_1);
-
+						ArrayList l = new ArrayList<String>();
+						array = new lists(a.this, l);
+						
 						for(int i = 0; i < lists.length(); i++){
 							JSONObject obj = lists.getJSONObject(i);
-							array.add(obj.getString("title") + " [" + obj.getString("author") + "]");
-
+							l.add(obj);
 						}
 
 						list.setAdapter(array);
