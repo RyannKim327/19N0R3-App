@@ -30,12 +30,15 @@ import java.util.ArrayList;
 public class a extends Activity {
 	SharedPreferences pref;
 	lists array;
+	ArrayList l;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Thread.setDefaultUncaughtExceptionHandler(new err(this));
 		
 		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#c58940")));
+		getActionBar().setTitle("Write Poetry");
+		getActionBar().setSubtitle("Developed by RyannKim327");
 		getWindow().setStatusBarColor(Color.parseColor("#c58940"));
 		
 		pref = getSharedPreferences("MPOP", MODE_PRIVATE);
@@ -47,7 +50,7 @@ public class a extends Activity {
 		
 		try{
 			final JSONArray lists = obj().getJSONArray("poems");
-			ArrayList l = new ArrayList<String>();
+			l = new ArrayList<String>();
 			array = new lists(this, l);
 			
 			for(int i = 0; i < lists.length(); i++){
@@ -63,11 +66,33 @@ public class a extends Activity {
 				@Override
 				public void beforeTextChanged(CharSequence p1, int p2, int p3, int p4) {}
 				@Override
-				public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {
-					array.getFilter().filter(filter.getText().toString());
-				}
+				public void onTextChanged(CharSequence p1, int p2, int p3, int p4) {}
 				@Override
-				public void afterTextChanged(Editable p1) {}
+				public void afterTextChanged(Editable p1) {
+					String s = filter.getText().toString().toLowerCase();
+					l.clear();
+					array.clear();
+					array.notifyDataSetChanged();
+					array.notifyDataSetInvalidated();
+					try{
+						if(s.isEmpty()){
+							for(int i = 0; i < lists.length(); i++){
+								JSONObject obj = lists.getJSONObject(i);
+								l.add(obj);
+							}
+						}else{
+							for(int i = 0; i < lists.length(); i++){
+								JSONObject obj = lists.getJSONObject(i);
+								if(obj.getString("title").toLowerCase().contains(s) || obj.getString("author").toLowerCase().contains(s)){
+									l.add(obj);
+								}
+							}
+						}
+						array.notifyDataSetChanged();
+						array.notifyDataSetInvalidated();
+						list.setAdapter(array);
+					}catch(JSONException e){}
+				}
 			});
 		
 			list.setAdapter(array);
@@ -75,7 +100,8 @@ public class a extends Activity {
 					@Override
 					public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4) {
 						try {
-							JSONObject o = lists.getJSONObject(p3);
+							String x = p1.getItemAtPosition(p3).toString();
+							JSONObject o = new JSONObject(x);
 							AlertDialog.Builder b = new AlertDialog.Builder(a.this);
 							b.setTitle(o.getString("title"));
 							b.setMessage(o.getString("content"));
@@ -91,6 +117,7 @@ public class a extends Activity {
 						} catch (JSONException e) {}
 					}
 				});
+				
 		} catch (JSONException e) {}
 		
 		layout.addView(filter);
@@ -107,15 +134,16 @@ public class a extends Activity {
 				public void onReceive(Context p1, Intent p2) {
 					String data = p2.getStringExtra("data");
 					try{
+						l.clear();
+						array.clear();
 						final JSONArray lists = obj().getJSONArray("poems");
-						ArrayList l = new ArrayList<String>();
 						array = new lists(a.this, l);
 						
 						for(int i = 0; i < lists.length(); i++){
 							JSONObject obj = lists.getJSONObject(i);
 							l.add(obj);
 						}
-
+						array.notifyDataSetChanged();
 						list.setAdapter(array);
 						list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 								@Override
