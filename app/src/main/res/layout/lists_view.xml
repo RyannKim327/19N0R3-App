@@ -12,15 +12,19 @@
 		android:text="Title"
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:layout_margin="3dp"
-		android:id="@+id/title"/>
+		android:id="@+id/title"
+		android:typeface="serif"
+		android:textStyle="italic"/>
 
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="Author"
-		android:textAppearance="?android:attr/textAppearanceSmall"
 		android:layout_margin="3dp"
-		android:id="@+id/author"/>
+		android:id="@+id/author"
+		android:textSize="10sp"
+		android:typeface="serif"
+		android:textStyle="italic"/>
 
 </LinearLayout>
 
