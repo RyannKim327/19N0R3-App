@@ -27,6 +27,8 @@ import mpop.revii.itsmypoem.R;
 import android.widget.TextView;
 import java.util.ArrayList;
 import android.graphics.Typeface;
+import android.content.pm.PackageManager;
+import android.content.DialogInterface;
 
 public class a extends Activity {
 	SharedPreferences pref;
@@ -102,7 +104,7 @@ public class a extends Activity {
 					public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4) {
 						try {
 							String x = p1.getItemAtPosition(p3).toString();
-							JSONObject o = new JSONObject(x);
+							final JSONObject o = new JSONObject(x);
 							AlertDialog.Builder b = new AlertDialog.Builder(a.this);
 							LinearLayout title = new LinearLayout(a.this);
 							TextView title1 = new TextView(a.this);
@@ -127,6 +129,24 @@ public class a extends Activity {
 							
 							b.setMessage(o.getString("content"));
 							b.setPositiveButton("Close", null);
+							if(check_application("mpop.revii.ignoreph")){
+								b.setNeutralButton("Update Poem", new DialogInterface.OnClickListener(){
+									@Override
+									public void onClick(DialogInterface p1, int p2) {
+										try {
+											Intent intent = new Intent(Intent.ACTION_SEND);
+											intent.putExtra("title", o.getString("title"));
+											intent.putExtra("author", o.getString("author"));
+											intent.putExtra("content", o.getString("content"));
+											intent.putExtra("id", o.getInt("id"));
+											intent.setType("text/plain");
+											intent.setPackage("mpop.revii.ignoreph");
+											Intent i2 = Intent.createChooser(intent, "Please Choose Writer App");
+											startActivity(i2);
+										} catch (JSONException e) {}
+									}
+								});
+							}
 							b.setCancelable(false);
 							//b.show();
 							b.setCustomTitle(title);
@@ -172,7 +192,7 @@ public class a extends Activity {
 								public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4) {
 									try {
 										String x = p1.getItemAtPosition(p3).toString();
-										JSONObject o = new JSONObject(x);
+										final JSONObject o = new JSONObject(x);
 										AlertDialog.Builder b = new AlertDialog.Builder(a.this);
 										LinearLayout title = new LinearLayout(a.this);
 										TextView title1 = new TextView(a.this);
@@ -197,6 +217,24 @@ public class a extends Activity {
 
 										b.setMessage(o.getString("content"));
 										b.setPositiveButton("Close", null);
+										if(check_application("mpop.revii.ignoreph")){
+											b.setNeutralButton("Update Poem", new DialogInterface.OnClickListener(){
+												@Override
+												public void onClick(DialogInterface p1, int p2) {
+													try {
+														Intent intent = new Intent(Intent.ACTION_SEND);
+														intent.putExtra("title", o.getString("title"));
+														intent.putExtra("author", o.getString("author"));
+														intent.putExtra("id", o.getInt("id"));
+														intent.putExtra("content", o.getString("content"));
+														intent.setType("text/plain");
+														intent.setPackage("mpop.revii.ignoreph");
+														Intent i2 = Intent.createChooser(intent, "Please Choose Writer App");
+														startActivity(i2);
+													} catch (JSONException e) {}
+												}
+											});
+										}
 										b.setCancelable(false);
 										b.setCustomTitle(title);
 										//b.show();
@@ -220,6 +258,14 @@ public class a extends Activity {
 			return obj;
 		} catch (JSONException e) {
 			return null;
+		}
+	}
+	boolean check_application(String packagename){
+		try{
+			createPackageContext(packagename, 0);
+			return true;
+		}catch(PackageManager.NameNotFoundException e){
+			return false;
 		}
 	}
 }
