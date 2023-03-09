@@ -26,6 +26,7 @@ import android.graphics.drawable.ColorDrawable;
 import mpop.revii.itsmypoem.R;
 import android.widget.TextView;
 import java.util.ArrayList;
+import android.graphics.Typeface;
 
 public class a extends Activity {
 	SharedPreferences pref;
@@ -103,11 +104,32 @@ public class a extends Activity {
 							String x = p1.getItemAtPosition(p3).toString();
 							JSONObject o = new JSONObject(x);
 							AlertDialog.Builder b = new AlertDialog.Builder(a.this);
-							b.setTitle(o.getString("title"));
+							LinearLayout title = new LinearLayout(a.this);
+							TextView title1 = new TextView(a.this);
+							TextView subtitle = new TextView(a.this);
+							
+							title.setOrientation(LinearLayout.VERTICAL);
+							title.setPadding(15, 0, 15, 0);
+							
+							title1.setText(o.getString("title"));
+							subtitle.setText(o.getString("author"));
+							
+							title1.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
+							subtitle.setTypeface(Typeface.SERIF, Typeface.ITALIC);
+							
+							title1.setTextSize(25);
+							subtitle.setTextSize(title1.getTextSize() / 3f);
+							
+							subtitle.setPadding(25, 0, 0, 0);
+							
+							title.addView(title1);
+							title.addView(subtitle);
+							
 							b.setMessage(o.getString("content"));
 							b.setPositiveButton("Close", null);
 							b.setCancelable(false);
 							//b.show();
+							b.setCustomTitle(title);
 							AlertDialog d = b.create();
 							float f = 15;
 							ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
@@ -149,12 +171,34 @@ public class a extends Activity {
 								@Override
 								public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4) {
 									try {
-										JSONObject o = lists.getJSONObject(p3);
+										String x = p1.getItemAtPosition(p3).toString();
+										JSONObject o = new JSONObject(x);
 										AlertDialog.Builder b = new AlertDialog.Builder(a.this);
-										b.setTitle(o.getString("title") + "\nBy: " + o.getString("author"));
+										LinearLayout title = new LinearLayout(a.this);
+										TextView title1 = new TextView(a.this);
+										TextView subtitle = new TextView(a.this);
+
+										title.setOrientation(LinearLayout.VERTICAL);
+										title.setPadding(15, 0, 15, 0);
+										
+										title1.setText(o.getString("title"));
+										subtitle.setText(o.getString("author"));
+
+										title1.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
+										subtitle.setTypeface(Typeface.SERIF, Typeface.ITALIC);
+
+										title1.setTextSize(25);
+										subtitle.setTextSize(title1.getTextSize() / 3f);
+
+										subtitle.setPadding(25, 0, 0, 0);
+
+										title.addView(title1);
+										title.addView(subtitle);
+
 										b.setMessage(o.getString("content"));
 										b.setPositiveButton("Close", null);
 										b.setCancelable(false);
+										b.setCustomTitle(title);
 										//b.show();
 										AlertDialog d = b.create();
 										float f = 15;
