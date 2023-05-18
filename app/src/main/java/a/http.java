@@ -10,7 +10,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
 
 public class http extends AsyncTask {
 	Context ctx;
@@ -32,7 +31,6 @@ public class http extends AsyncTask {
 			}
 			return x;
 		} catch (Exception e) {
-			//Toast.makeText(ctx, e.getMessage(), 1).show();
 			return null;
 		}
 	}

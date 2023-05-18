@@ -1,14 +1,14 @@
 package a;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
 import mpop.revii.itsmypoem.R;
-import android.view.LayoutInflater;
-import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class lists extends ArrayAdapter<JSONObject>{
 	Context x;
@@ -27,4 +27,5 @@ public class lists extends ArrayAdapter<JSONObject>{
 		} catch (JSONException e) {}
 		return v;
 	}
+    
 }

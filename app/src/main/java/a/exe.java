@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class exe extends Activity {
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,5 +33,6 @@ public class exe extends Activity {
 		base.addView(tv);
 		setContentView(base);
 	}
+    
 }
 

@@ -3,59 +3,55 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import java.util.ArrayList;
+import mpop.revii.itsmypoem.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
-import android.graphics.Color;
-import android.widget.Toast;
-import android.graphics.drawable.ColorDrawable;
-import mpop.revii.itsmypoem.R;
-import android.widget.TextView;
-import java.util.ArrayList;
-import android.graphics.Typeface;
-import android.content.pm.PackageManager;
-import android.content.DialogInterface;
-import android.view.Gravity;
-import android.widget.ScrollView;
-import android.widget.LinearLayout.LayoutParams;
 
 public class a extends Activity {
+    
 	SharedPreferences pref;
 	lists array;
 	ArrayList l;
-    String MAIN_COLOR = "#fff0def0";
-    String TEXT_COLOR = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Thread.setDefaultUncaughtExceptionHandler(new err(this));
 		
-        setTheme(android.R.style.Theme_DeviceDefault_Light);
-		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(MAIN_COLOR)));
+        setTheme(R.style.MPOPThemeDefault);
+		getActionBar().setBackgroundDrawable(new ColorDrawable(R.color.mainBackground));
 		getActionBar().setTitle("Write Poetry");
 		getActionBar().setSubtitle("Developed by RyannKim327");
-		getWindow().setStatusBarColor(Color.parseColor(MAIN_COLOR));
+		// getWindow().setStatusBarColor(R.color.mainBackground);
 		
 		pref = getSharedPreferences("MPOP", MODE_PRIVATE);
 		LinearLayout layout = new LinearLayout(this);
 		final EditText filter = new EditText(this);
 		final ListView list = new ListView(this);
 		
-		layout.setBackgroundColor(Color.parseColor(MAIN_COLOR));
+		//layout.setBackgroundColor(R.color.mainBackground);
 		
 		try{
 			final JSONArray lists = obj().getJSONArray("poems");
@@ -228,7 +224,7 @@ public class a extends Activity {
             AlertDialog d = b.create();
             float f = 15;
             ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
-            s.getPaint().setColor(Color.parseColor(MAIN_COLOR));
+            //s.getPaint().setColor(R.color.mainBackground);
             d.getWindow().setBackgroundDrawable(s);
             d.show();
         } catch (JSONException e) {}
