@@ -53,10 +53,10 @@ public class http extends AsyncTask {
 					ctx.sendBroadcast(i);
 				}
 			}catch(JSONException e){
-				Toast.makeText(ctx, "Cant acceptable", 1).show();
+				Toast.makeText(ctx, "Invalid Data", 1).show();
 			}
 		}else{
-			Toast.makeText(ctx, "Cant acceptable", 1).show();
+			Toast.makeText(ctx, "Invalid data", 1).show();
 		}
 	}
 }

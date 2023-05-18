@@ -31,7 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class a extends Activity {
-    
+	
 	SharedPreferences pref;
 	lists array;
 	ArrayList l;
@@ -40,7 +40,7 @@ public class a extends Activity {
 		super.onCreate(savedInstanceState);
 		Thread.setDefaultUncaughtExceptionHandler(new err(this));
 		
-        setTheme(R.style.MPOPThemeDefault);
+		setTheme(R.style.MPOPThemeDefault);
 		getActionBar().setBackgroundDrawable(new ColorDrawable(R.color.mainBackground));
 		getActionBar().setTitle("Write Poetry");
 		getActionBar().setSubtitle("Developed by RyannKim327");
@@ -162,71 +162,71 @@ public class a extends Activity {
 			return false;
 		}
 	}
-    void dialog(AdapterView<?> p1, int p3){
-        try {
-            String x = p1.getItemAtPosition(p3).toString();
-            final JSONObject o = new JSONObject(x);
-            AlertDialog.Builder b = new AlertDialog.Builder(a.this);
-            LinearLayout title = new LinearLayout(a.this);
-            ScrollView msg = new ScrollView(a.this);
-            TextView title1 = new TextView(a.this);
-            TextView subtitle = new TextView(a.this);
-            TextView message = new TextView(a.this);
+	void dialog(AdapterView<?> p1, int p3){
+		try {
+			String x = p1.getItemAtPosition(p3).toString();
+			final JSONObject o = new JSONObject(x);
+			AlertDialog.Builder b = new AlertDialog.Builder(a.this);
+			LinearLayout title = new LinearLayout(a.this);
+			ScrollView msg = new ScrollView(a.this);
+			TextView title1 = new TextView(a.this);
+			TextView subtitle = new TextView(a.this);
+			TextView message = new TextView(a.this);
 
-            title.setOrientation(LinearLayout.VERTICAL);
-            title.setPadding(15, 0, 15, 0);
+			title.setOrientation(LinearLayout.VERTICAL);
+			title.setPadding(15, 0, 15, 0);
 
-            title1.setText(o.getString("title"));
-            subtitle.setText(o.getString("author"));
+			title1.setText(o.getString("title"));
+			subtitle.setText(o.getString("author"));
 
-            title1.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
-            subtitle.setTypeface(Typeface.SERIF, Typeface.ITALIC);
+			title1.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
+			subtitle.setTypeface(Typeface.SERIF, Typeface.ITALIC);
 
-            title1.setTextSize(25);
-            subtitle.setTextSize(title1.getTextSize() / 3f);
+			title1.setTextSize(25);
+			subtitle.setTextSize(title1.getTextSize() / 3f);
 
-            subtitle.setPadding(25, 0, 0, 0);
+			subtitle.setPadding(25, 0, 0, 0);
 
-            title.addView(title1);
-            title.addView(subtitle);
+			title.addView(title1);
+			title.addView(subtitle);
 
-            message.setText(o.getString("content"));
-            message.setGravity(Gravity.CENTER);
-            message.setTextSize(19);
-            message.setPadding(5, 0, 5, 0);
+			message.setText(o.getString("content"));
+			message.setGravity(Gravity.CENTER);
+			message.setTextSize(19);
+			message.setPadding(5, 0, 5, 0);
 
-            msg.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 25));
-            msg.addView(message);
+			msg.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 25));
+			msg.addView(message);
 
-            b.setView(msg);
-            b.setPositiveButton("Close", null);
-            if(check_application("mpop.revii.ignoreph")){
-                b.setNeutralButton("Update Poem", new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface p1, int p2) {
-                            try {
-                                Intent intent = new Intent(Intent.ACTION_SEND);
-                                intent.putExtra("title", o.getString("title"));
-                                intent.putExtra("author", o.getString("author"));
-                                intent.putExtra("content", o.getString("content"));
-                                intent.putExtra("id", o.getInt("id"));
-                                intent.setType("text/plain");
-                                intent.setPackage("mpop.revii.ignoreph");
-                                Intent i2 = Intent.createChooser(intent, "Please Choose Writer App");
-                                startActivity(i2);
-                            } catch (JSONException e) {}
-                        }
-                    });
-            }
-            b.setCancelable(false);
-            //b.show();
-            b.setCustomTitle(title);
-            AlertDialog d = b.create();
-            float f = 15;
-            ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
-            //s.getPaint().setColor(R.color.mainBackground);
-            d.getWindow().setBackgroundDrawable(s);
-            d.show();
-        } catch (JSONException e) {}
-    }
+			b.setView(msg);
+			b.setPositiveButton("Close", null);
+			if(check_application("mpop.revii.ignoreph")){
+				b.setNeutralButton("Update Poem", new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface p1, int p2) {
+							try {
+								Intent intent = new Intent(Intent.ACTION_SEND);
+								intent.putExtra("title", o.getString("title"));
+								intent.putExtra("author", o.getString("author"));
+								intent.putExtra("content", o.getString("content"));
+								intent.putExtra("id", o.getInt("id"));
+								intent.setType("text/plain");
+								intent.setPackage("mpop.revii.ignoreph");
+								Intent i2 = Intent.createChooser(intent, "Please Choose Writer App");
+								startActivity(i2);
+							} catch (JSONException e) {}
+						}
+					});
+			}
+			b.setCancelable(false);
+			//b.show();
+			b.setCustomTitle(title);
+			AlertDialog d = b.create();
+			float f = 15;
+			ShapeDrawable s = new ShapeDrawable(new RoundRectShape(new float[]{f, f, f, f, f, f, f, f}, null, null));
+			//s.getPaint().setColor(R.color.mainBackground);
+			d.getWindow().setBackgroundDrawable(s);
+			d.show();
+		} catch (JSONException e) {}
+	}
 }

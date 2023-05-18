@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Write Poetry</string>
+	<string name="app_name">Write Poetry</string>
+	<string name="org">MPOP Reverse II</string>
+	<string name="developer">Ryann Kim Sesgundo</string>
 </resources>

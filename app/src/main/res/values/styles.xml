@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+	<style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar"></style>
+	
+	<style name="MPOPThemeDefault" parent="@android:style/Theme.DeviceDefault.Light">
+		<item name="android:colorPrimary">@color/colorPrimary</item>
+		<item name="android:windowBackground">@color/mainBackground</item>
+		<item name="android:textColor">@color/textColor</item>
 	</style>
-    <style name="MPOPThemeDefault" parent="@android:style/Theme.DeviceDefault.Light">
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:windowBackground">@color/mainBackground</item>
-        <item name="android:textColor">@color/textColor</item>
-    </style>
 </resources>

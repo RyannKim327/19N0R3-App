@@ -11,11 +11,11 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 public class err implements UncaughtExceptionHandler {
 	Context a;
-    
+	
 	public err(Context ctx){
 		a = ctx;
 	}
-    
+	
 	@Override
 	public void uncaughtException(Thread p1, Throwable p2) {
 		Writer w = new StringWriter();
